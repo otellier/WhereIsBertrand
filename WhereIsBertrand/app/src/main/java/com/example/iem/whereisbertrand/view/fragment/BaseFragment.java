@@ -1,7 +1,10 @@
-package com.example.iem.whereisbertrand.view;
+package com.example.iem.whereisbertrand.view.fragment;
 
 import android.support.v4.app.Fragment;
 import android.content.Context;
+
+import com.example.iem.whereisbertrand.view.MainActivity;
+import com.example.iem.whereisbertrand.manager.*;
 
 /**
  * Created by iem on 30/04/2018.
