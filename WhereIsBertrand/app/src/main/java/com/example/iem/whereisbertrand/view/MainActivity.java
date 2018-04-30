@@ -14,6 +14,6 @@ public class MainActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //showFragment(HomeFragment.newInstance());
+        showFragment(HomeFragment.newInstance());
     }
 }
