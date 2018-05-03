@@ -26,16 +26,18 @@ public class ManagerMicroController {
 
     public void displayAnimation(final ImageView imageView, String fileName, int numberOfImages, Context context){
 
-        int signalStrength = 200;
+        double signalStrength = 0.5;
 
         final AnimationDrawable animation = new AnimationDrawable();
         animation.setOneShot(false);
 
         for(int i = 1; i <= numberOfImages; i++){
-            animation.addFrame(context.getResources().getDrawable(context.getResources().getIdentifier(fileName + "_" + i, "raw", context.getPackageName())), signalStrength);
+            animation.addFrame(context.getResources().getDrawable(context.getResources().getIdentifier(fileName + "_" + i, "raw", context.getPackageName())), (int)(signalStrength*100));
+            Log.d("CHEVRE", fileName + "_" + i);
         }
 
         imageView.setImageDrawable(animation);
+        animation.start();
     }
 
     public void makeABIP(){

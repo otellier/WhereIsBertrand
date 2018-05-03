@@ -36,7 +36,8 @@ public class BluetoothResearchFragment extends BaseFragment {
         context = getActivity().getApplicationContext();
 
         imageView = v.findViewById(R.id.imageWave);
-        ManagerMicroController.getInstance().displayAnimation(imageView, "frame", 18, context);
+        buttonBIP = v.findViewById(R.id.buttonBIP);
+        ManagerMicroController.getInstance().displayAnimation(imageView, "frame", 17, context);
         buttonBIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
