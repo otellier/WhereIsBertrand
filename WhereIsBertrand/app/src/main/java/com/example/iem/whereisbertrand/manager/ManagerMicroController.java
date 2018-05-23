@@ -11,28 +11,30 @@ import android.widget.ImageView;
 
 public class ManagerMicroController {
     private static final ManagerMicroController ourInstance = new ManagerMicroController();
+    AnimationDrawable animation;
 
     public static ManagerMicroController getInstance() {
         return ourInstance;
     }
 
     private ManagerMicroController() {
-
+        animation = new AnimationDrawable();
     }
 
     public boolean isDeviceInRange(){
         return true;
     }
 
-    public void displayAnimation(final ImageView imageView, String fileName, int numberOfImages, Context context){
+    public void displayAnimation(final ImageView imageView, String fileName, int numberOfImages, Context context, double signalStrength){
 
-        double signalStrength = 0.5;
+        double msignalStrength = 20 + Math.abs(signalStrength) ;
+        animation.stop();
+        animation = new AnimationDrawable();
 
-        final AnimationDrawable animation = new AnimationDrawable();
         animation.setOneShot(false);
 
         for(int i = 1; i <= numberOfImages; i++){
-            animation.addFrame(context.getResources().getDrawable(context.getResources().getIdentifier(fileName + "_" + i, "raw", context.getPackageName())), (int)(signalStrength*100));
+            animation.addFrame(context.getResources().getDrawable(context.getResources().getIdentifier(fileName + "_" + i, "raw", context.getPackageName())), (int)(msignalStrength));
             Log.d("CHEVRE", fileName + "_" + i);
         }
 
