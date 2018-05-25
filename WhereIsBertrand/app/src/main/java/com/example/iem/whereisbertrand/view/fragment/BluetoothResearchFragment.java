@@ -4,6 +4,8 @@ import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattServerCallback;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -64,6 +66,9 @@ public class BluetoothResearchFragment extends BaseFragment {
         btManager = (BluetoothManager)context.getSystemService(Context.BLUETOOTH_SERVICE);
         btAdapter = btManager.getAdapter();
         btScanner = btAdapter.getBluetoothLeScanner();
+        GattServerCallback gattServerCallback = new GattServerCallback();
+
+        btManager.openGattServer(context, gattServerCallback);
         if (btAdapter != null && !btAdapter.isEnabled()) {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent, 2 );
@@ -91,6 +96,7 @@ public class BluetoothResearchFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Log.d("CHEVRE", "La chèvre malicieuse est de retour, comme dans tout code android qui se respecte");
+                connectDevice(device);
                 ManagerMicroController.getInstance().makeABIP();
             }
         });
@@ -165,4 +171,13 @@ public class BluetoothResearchFragment extends BaseFragment {
             return accuracy;
         }
     }
+
+    private void connectDevice(BluetoothDevice device) {
+        GattClientCallback gattClientCallback = new GattClientCallback();
+        device.connectGatt(context, false, gattClientCallback);
+
+    }
 }
+class GattServerCallback extends BluetoothGattServerCallback {}
+
+class GattClientCallback extends BluetoothGattCallback { }

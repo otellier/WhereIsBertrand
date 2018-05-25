@@ -27,14 +27,28 @@ public class ManagerMicroController {
 
     public void displayAnimation(final ImageView imageView, String fileName, int numberOfImages, Context context, double signalStrength){
 
-        double msignalStrength = 20 + Math.abs(signalStrength) ;
+        int msignalStrength = 100;
         animation.stop();
         animation = new AnimationDrawable();
-
         animation.setOneShot(false);
+        if(signalStrength < -30.0 && signalStrength > -40.0){
+            msignalStrength = 10;
+        }
+        else if(signalStrength < -40.0 && signalStrength > -50.0){
+            msignalStrength = 40;
+        }
+        else if(signalStrength < -50.0 && signalStrength > -60.0){
+            msignalStrength = 70;
+        }
+        else if(signalStrength < -60.0 && signalStrength > -70.0){
+            msignalStrength = 90;
+        }
+        else if(signalStrength < -70.0 && signalStrength > -80.0){
+            msignalStrength = 110;
+        }
 
         for(int i = 1; i <= numberOfImages; i++){
-            animation.addFrame(context.getResources().getDrawable(context.getResources().getIdentifier(fileName + "_" + i, "raw", context.getPackageName())), (int)(msignalStrength));
+            animation.addFrame(context.getResources().getDrawable(context.getResources().getIdentifier(fileName + "_" + i, "raw", context.getPackageName())), msignalStrength);
             Log.d("CHEVRE", fileName + "_" + i);
         }
 
