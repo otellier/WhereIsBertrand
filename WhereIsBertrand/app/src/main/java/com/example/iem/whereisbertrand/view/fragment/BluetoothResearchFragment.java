@@ -4,9 +4,11 @@ import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattServerCallback;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
@@ -173,11 +175,11 @@ public class BluetoothResearchFragment extends BaseFragment {
     }
 
     private void connectDevice(BluetoothDevice device) {
-        GattClientCallback gattClientCallback = new GattClientCallback();
+        final GattClientCallback gattClientCallback = new GattClientCallback();
         device.connectGatt(context, false, gattClientCallback);
-
     }
 }
 class GattServerCallback extends BluetoothGattServerCallback {}
 
-class GattClientCallback extends BluetoothGattCallback { }
+class GattClientCallback extends BluetoothGattCallback {
+}
